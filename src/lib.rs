@@ -45,7 +45,7 @@
 //!     name: String,
 //! }
 //!
-//! /// Implementation of the helper trait require by `hs_bindgen`
+//! /// Implementation of the helper trait required by `hs_bindgen`
 //! impl ReprC<*const i8> for User {
 //!     fn from(ptr: *const i8) -> Self {
 //!         User {

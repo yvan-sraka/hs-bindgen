@@ -20,6 +20,17 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "baf1de4339761588bc0619e3cbc0120ee582ebb74b53b4efbf79117bd2da40fd"
 
 [[package]]
+name = "displaydoc"
+version = "0.2.3"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "3bf95dc3f046b9da4f2d51833c0d3547d8564ef6910f5c1ed130306a75b92886"
+dependencies = [
+ "proc-macro2",
+ "quote",
+ "syn",
+]
+
+[[package]]
 name = "getrandom"
 version = "0.2.8"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -32,7 +43,7 @@ dependencies = [
 
 [[package]]
 name = "hs-bindgen"
-version = "0.5.0"
+version = "0.5.1"
 dependencies = [
  "hs-bindgen-derive",
  "hs-bindgen-traits",
@@ -40,35 +51,39 @@ dependencies = [
 
 [[package]]
 name = "hs-bindgen-derive"
-version = "0.5.0"
+version = "0.5.1"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "2b40c2dd39e3351ef762bc7a07548c7bbd10aef1cc3bf0b9c658ce705f7bd1f5"
+checksum = "c83f0479b14475ec3cb43a8d30ae5ec436ca8e21827cba7b41a1c432b4e4f5a9"
 dependencies = [
  "antlion",
+ "displaydoc",
  "hs-bindgen-traits",
  "proc-macro2",
  "quote",
  "semver",
  "serde",
  "syn",
+ "thiserror",
  "toml",
 ]
 
 [[package]]
 name = "hs-bindgen-traits"
-version = "0.5.0"
+version = "0.5.1"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "9d449af341c188d2010e722d94d7c008feb57b4669ed68b86178e5b1b42d99d1"
+checksum = "67ba6e1d0449b15ef249a3a7af0847d8a03998f2b67149d406cebf6a787af0e4"
 dependencies = [
+ "displaydoc",
  "proc-macro2",
  "quote",
+ "thiserror",
 ]
 
 [[package]]
 name = "libc"
-version = "0.2.135"
+version = "0.2.136"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "68783febc7782c6c5cb401fbda4de5a9898be1762314da0bb2c10ced61f18b0c"
+checksum = "55edcf6c0bb319052dea84732cf99db461780fd5e8d3eb46ab6ff312ab31f197"
 
 [[package]]
 name = "ppv-lite86"
@@ -159,6 +174,26 @@ dependencies = [
  "proc-macro2",
  "quote",
  "unicode-ident",
+]
+
+[[package]]
+name = "thiserror"
+version = "1.0.37"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "10deb33631e3c9018b9baf9dcbbc4f737320d2b576bac10f6aefa048fa407e3e"
+dependencies = [
+ "thiserror-impl",
+]
+
+[[package]]
+name = "thiserror-impl"
+version = "1.0.37"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "982d17546b47146b28f7c22e3d08465f6b8903d0ea13c1660d9d84a6e7adcdbb"
+dependencies = [
+ "proc-macro2",
+ "quote",
+ "syn",
 ]
 
 [[package]]
