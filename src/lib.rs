@@ -7,13 +7,15 @@
 //!
 //! # Examples
 //!
-//! A minimal example would be to have a function annoted like this:
+//! A minimal example would be to have a function annotated like this:
 //!
 //! ```rust
 //! use hs_bindgen::*;
 //!
-//! /// Declare targeted Haskell signature
-//! #[hs_bindgen(hello :: CString -> IO ())]
+//! /// Haskell type signature are auto-magically inferred from Rust function
+//! /// type! This feature could slow down compilation and be disabled with:
+//! /// `hs-bindgen = { ..., default-features = false }`
+//! #[hs_bindgen]
 //! fn greetings(name: &str) {
 //!     println!("Hello, {name}!");
 //! }
@@ -45,6 +47,12 @@
 //!     name: String,
 //! }
 //!
+//! /// Declare targeted Haskell signature
+//! #[hs_bindgen(hello :: CString -> IO ())]
+//! fn hello(user: User) {
+//!     println!("Hello, {}!", user.name);
+//! }
+//!
 //! /// Implementation of the helper trait required by `hs_bindgen`
 //! impl ReprC<*const i8> for User {
 //!     fn from(ptr: *const i8) -> Self {
@@ -52,11 +60,6 @@
 //!             name: <String as ReprC<*const i8>>::from(ptr),
 //!         }
 //!     }
-//! }
-//!
-//! #[hs_bindgen(hello :: CString -> IO ())]
-//! fn hello(user: User) {
-//!     println!("Hello, {}!", user.name);
 //! }
 //! ```
 //!
