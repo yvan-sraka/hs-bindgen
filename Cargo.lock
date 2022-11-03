@@ -4,9 +4,9 @@ version = 3
 
 [[package]]
 name = "antlion"
-version = "0.2.0"
+version = "0.3.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "f89fe573d87f5ecd8a06e5cba62d87d5a5beb98f4ab982e3790d0d59a2126414"
+checksum = "05e3fba4a8ac57acff5f57d7227434034ac82745f4d723036b0ad16c318edeca"
 dependencies = [
  "proc-macro2",
  "quote",
@@ -25,7 +25,7 @@ dependencies = [
 
 [[package]]
 name = "hs-bindgen"
-version = "0.5.2"
+version = "0.6.0"
 dependencies = [
  "hs-bindgen-derive",
  "hs-bindgen-traits",
@@ -33,14 +33,14 @@ dependencies = [
 
 [[package]]
 name = "hs-bindgen-derive"
-version = "0.5.2"
+version = "0.6.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "fb82451821acec9b2f6cde7b3b1c98465e96624c218b78efb7d5c4b4ff67b8a6"
+checksum = "a066069a046245469b239e4190de7ed90e9990da87812ca67611291d8b41d307"
 dependencies = [
  "antlion",
  "displaydoc",
  "hs-bindgen-traits",
- "proc-macro2",
+ "lazy_static",
  "quote",
  "semver",
  "serde",
@@ -51,15 +51,21 @@ dependencies = [
 
 [[package]]
 name = "hs-bindgen-traits"
-version = "0.5.2"
+version = "0.6.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "af02a5cad0382a7b0d491ca0b7952f10a27acfb143d805f1f80693814a2a3e5e"
+checksum = "cdf1a0d57c624d333922aca447e3895cd02043cf3ec8540cba69867c77500f57"
 dependencies = [
  "displaydoc",
  "proc-macro2",
  "quote",
  "thiserror",
 ]
+
+[[package]]
+name = "lazy_static"
+version = "1.4.0"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "e2abad23fbc42b3700f2f279844dc832adb2b2eb069b2df918f455c4e18cc646"
 
 [[package]]
 name = "proc-macro2"

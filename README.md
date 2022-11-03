@@ -33,8 +33,14 @@ fn greetings(name: &str) {
 }
 
 #[no_mangle] // Mangling randomize symbols
-extern "C" fn __c_greetings(__0: *const std::os::raw::c_char) {
-    greetings(traits::ReprC::from(__0))
+extern "C" fn __c_greetings(__0: *const core::ffi::c_char) -> () {
+    // `traits` module is `hs-bindgen::hs-bindgen-traits`
+    // n.b. do not forget to import it, e.g., with `use hs-bindgen::*`
+    let x = traits::ReprC::from(greetings(traits::ReprRust::from(__0),));
+    // since the value is passed to Haskell runtime, we want Rust to never
+    // drop it!
+    std::mem::forget(x);
+    x
 }
 ```
 
@@ -42,28 +48,81 @@ A more complete example, when we now try to pass a custom type to our
 interface:
 
 ```rust
-use hs_bindgen::{traits::ReprC, *};
+use hs_bindgen::{traits::ReprRust, *};
+use std::marker::PhantomData;
 
-/// A custom Rust data-type
-struct User {
+/// A custom Rust data-type, `#[repr(transparent)]` is not useful here
+/// since `ReprRust` trait will offers the constructor we need to construct
+/// our type out of a C-FFI safe primitive data-structure.
+struct User<T: Kind> {
     name: String,
+    kind: PhantomData<T>,
 }
 
-/// Declare targeted Haskell signature
-#[hs_bindgen(hello :: CString -> IO ())]
-fn hello(user: User) {
-    println!("Hello, {}!", user.name);
+/** Overly engineered traits definitions just for the sake of demonstrating
+limitations of this example, this isn't at all needed by default */
+
+struct Super;
+
+trait Kind {
+    fn greet(name: &str) -> String;
 }
 
-/// Implementation of the helper trait required by `hs_bindgen`
-impl ReprC<*const i8> for User {
+impl Kind for Super {
+    fn greet(name: &str) -> String {
+        format!("Hello, {}!", name)
+    }
+}
+
+/// Declare targeted Haskell signature, return types should be wrapped in
+/// an IO Monad (a behavior enforced by safety concerns)
+#[hs_bindgen(hello :: CString -> IO CString)]
+fn hello(user: User<Super>) -> String {
+    Super::greet(&user.name)
+}
+
+/** n.b. functions wrapped by `#[hs_bindgen]` macro couldn't be
+parametrized by generics (because monomorphisation occurs after macro
+expansion during compilation, and how rustc assign unmangled symbols to
+monomorphised methods are AFAIK not a publicly specified behavior), but
+this limitation didn’t apply to `hs-bindgen-traits` implementations! */
+
+impl<T: Kind> ReprRust<*const i8> for User<T> {
     fn from(ptr: *const i8) -> Self {
-        User {
-            name: <String as ReprC<*const i8>>::from(ptr),
+        User::<T> {
+            name: <String as ReprRust<*const i8>>::from(ptr),
+            kind: PhantomData::<T>
         }
     }
 }
 ```
+
+## Design
+
+First, I would thank [Michael Gattozzi](https://twitter.com/mgattozzi) who
+implement [a (no longer maintained) implementation](https://github.com/mgattozzi/curryrs)
+to binding generation between Rust and Haskell and
+[his writings](https://blog.mgattozzi.dev/haskell-rust/) and guidance
+really help me to quick start this project.
+
+I try to architect `hs-bindgen` with these core design principles:
+
+- **Simplicity:** as KISS UNIX philosophy of minimalism, meaning here I
+  tried to never re-implement feature already handled by Rust programming
+  language (parsing code, infer types, etc.), I rather rely on capabilities
+  of macro and trait systems. E.g. the only bit of parsing left in this
+  code its Haskell function signature (which is trivial giving the feature
+  set of authorized C-FFI safe types) ;
+
+- **Modularity:** this library is design in mind to work in a broader range
+  of usage, so this library should work in `#[no_std]` setting and most
+  features could be opt-out. E.g. the type inference offered by
+  [`antlion`](https://github.com/yvan-sraka/antlion) library is optional ;
+
+- **Stability:** this library implements no trick outside the scope of
+  stable C ABI (with well-defined memory layout convention), and ensure to
+  provide ergonomics without breaking this safety rule of thumb. There is
+  no magic that could be break by any `rustc` or GHC update!
 
 ## Acknowledgments
 
