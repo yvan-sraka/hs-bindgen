@@ -36,11 +36,7 @@ fn greetings(name: &str) {
 extern "C" fn __c_greetings(__0: *const core::ffi::c_char) -> () {
     // `traits` module is `hs-bindgen::hs-bindgen-traits`
     // n.b. do not forget to import it, e.g., with `use hs-bindgen::*`
-    let x = traits::ReprC::from(greetings(traits::ReprRust::from(__0),));
-    // since the value is passed to Haskell runtime, we want Rust to never
-    // drop it!
-    std::mem::forget(x);
-    x
+    traits::ReprC::from(greetings(traits::ReprRust::from(__0),))
 }
 ```
 
