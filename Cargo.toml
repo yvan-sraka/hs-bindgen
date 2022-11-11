@@ -1,10 +1,12 @@
 [package]
-name = "hs-bindgen"
-version = "0.6.1"
-edition = "2021"
+authors = ["Yvan Sraka <yvan@sraka.xyz>"]
 description = "Handy macro to generate C-FFI bindings from Rust to Haskell"
+edition = "2021"
+license = "MIT OR Apache-2.0"
+name = "hs-bindgen"
 repository = "https://github.com/yvan-sraka/hs-bindgen"
-license = "MIT"
+rust-version = "1.64.0"
+version = "0.6.2"
 
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 

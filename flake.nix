@@ -1,26 +1,27 @@
 {
   inputs = {
-    nixpkgs.url = "github:NixOS/nixpkgs/nixpkgs-unstable";
-    utils.url = "github:numtide/flake-utils";
-    cargo-sync-readme.url = "github:yvan-sraka/cargo-sync-readme";
+    flake-utils.url = "github:numtide/flake-utils";
+    nixpkgs-mozilla = {
+      url = "github:mozilla/nixpkgs-mozilla";
+      flake = false;
+    };
   };
 
-  outputs = { self, nixpkgs, utils, cargo-sync-readme }:
-    utils.lib.eachDefaultSystem (system:
+  outputs = { self, flake-utils, nixpkgs, nixpkgs-mozilla }:
+    flake-utils.lib.eachDefaultSystem (system:
       let
-        pkgs = import nixpkgs { inherit system; };
-        sync-readme = cargo-sync-readme.defaultPackage.${system};
+        pkgs = (import nixpkgs) {
+          inherit system;
+          overlays = [ (import nixpkgs-mozilla) ];
+        };
+        toolchain = (pkgs.rustChannelOf {
+          rustToolchain = ./rust-toolchain;
+          sha256 = "sha256-DzNEaW724O8/B8844tt5AVHmSjSQ3cmzlU4BP90oRlY=";
+        }).rust;
       in {
         devShell = with pkgs;
           mkShell {
-            buildInputs = [
-              cargo
-              sync-readme
-              rust-analyzer
-              rustc
-              rustfmt
-              rustPackages.clippy
-            ];
+            buildInputs = [ libiconv toolchain ];
             RUST_SRC_PATH = rustPlatform.rustLibSrc;
           };
       });

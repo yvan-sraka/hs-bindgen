@@ -1,11 +1,13 @@
 //! # `hs-bindgen`
 //!
-//! Handy macro to generate C-FFI bindings from Rust to Haskell.
+//! Handy macro to generate C-FFI bindings to Rust for Haskell.
 //!
 //! This library intended to work best in a project configured by
 //! [`cabal-pack`](https://github.com/yvan-sraka/cabal-pack).
 //!
-//! # Examples
+//! **N.B.** The MSRV is **1.64.0** since we use `core_ffi_c` library feature.
+//!
+//! ## Examples
 //!
 //! A minimal example would be to have a function annotated like this:
 //!
@@ -98,21 +100,21 @@
 //! to binding generation between Rust and Haskell and
 //! [his writings](https://blog.mgattozzi.dev/haskell-rust/) and guidance
 //! really help me to quick start this project.
-//! 
+//!
 //! I try to architect `hs-bindgen` with these core design principles:
-//! 
+//!
 //! - **Simplicity:** as KISS UNIX philosophy of minimalism, meaning here I
 //!   tried to never re-implement feature already handled by Rust programming
 //!   language (parsing code, infer types, etc.), I rather rely on capabilities
 //!   of macro and trait systems. E.g. the only bit of parsing left in this
 //!   code its Haskell function signature (which is trivial giving the feature
 //!   set of authorized C-FFI safe types) ;
-//! 
+//!
 //! - **Modularity:** this library is design in mind to work in a broader range
 //!   of usage, so this library should work in `#[no_std]` setting and most
 //!   features could be opt-out. E.g. the type inference offered by
 //!   [`antlion`](https://github.com/yvan-sraka/antlion) library is optional ;
-//! 
+//!
 //! - **Stability:** this library implements no trick outside the scope of
 //!   stable C ABI (with well-defined memory layout convention), and ensure to
 //!   provide ergonomics without breaking this safety rule of thumb. There is
@@ -128,6 +130,15 @@
 //!
 //! This project was part of a work assignment as an
 //! [IOG](https://github.com/input-output-hk) contractor.
+//!
+//! ## License
+//!
+//! Licensed under either of [Apache License](LICENSE-APACHE), Version 2.0 or
+//! [MIT license](LICENSE-MIT) at your option.
+//!
+//! Unless you explicitly state otherwise, any contribution intentionally submitted
+//! for inclusion in this project by you, as defined in the Apache-2.0 license,
+//! shall be dual licensed as above, without any additional terms or conditions.
 
 pub use hs_bindgen_derive::hs_bindgen;
 pub use hs_bindgen_traits as traits;

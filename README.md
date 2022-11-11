@@ -2,12 +2,14 @@
 
 # `hs-bindgen`
 
-Handy macro to generate C-FFI bindings from Rust to Haskell.
+Handy macro to generate C-FFI bindings to Rust for Haskell.
 
 This library intended to work best in a project configured by
 [`cabal-pack`](https://github.com/yvan-sraka/cabal-pack).
 
-# Examples
+**N.B.** The MSRV is **1.64.0** since we use `core_ffi_c` library feature.
+
+## Examples
 
 A minimal example would be to have a function annotated like this:
 
@@ -130,5 +132,14 @@ I try to architect `hs-bindgen` with these core design principles:
 
 This project was part of a work assignment as an
 [IOG](https://github.com/input-output-hk) contractor.
+
+## License
+
+Licensed under either of [Apache License](LICENSE-APACHE), Version 2.0 or
+[MIT license](LICENSE-MIT) at your option.
+
+Unless you explicitly state otherwise, any contribution intentionally submitted
+for inclusion in this project by you, as defined in the Apache-2.0 license,
+shall be dual licensed as above, without any additional terms or conditions.
 
 <!-- cargo-sync-readme end -->
