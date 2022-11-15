@@ -7,7 +7,7 @@ Handy macro to generate C-FFI bindings to Rust for Haskell.
 This library intended to work best in a project configured by
 [`cabal-pack`](https://github.com/yvan-sraka/cabal-pack).
 
-**N.B.** The MSRV is **1.64.0** since we use `core_ffi_c` library feature.
+**N.B.** The MSRV is **1.64.0** since it use `core_ffi_c` feature.
 
 ## Examples
 
@@ -17,8 +17,8 @@ A minimal example would be to have a function annotated like this:
 use hs_bindgen::*;
 
 /// Haskell type signature are auto-magically inferred from Rust function
-/// type! This feature could slow down compilation and be disabled with:
-/// `hs-bindgen = { ..., default-features = false }`
+/// type! This feature could slow down compilation, and be enabled with:
+/// `hs-bindgen = { ..., features = [ "full" ] }`
 #[hs_bindgen]
 fn greetings(name: &str) {
     println!("Hello, {name}!");

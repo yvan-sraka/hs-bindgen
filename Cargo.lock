@@ -4,9 +4,9 @@ version = 3
 
 [[package]]
 name = "antlion"
-version = "0.3.0"
+version = "0.3.1"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "05e3fba4a8ac57acff5f57d7227434034ac82745f4d723036b0ad16c318edeca"
+checksum = "bcf7aed4234b1c5187bb53a77552d2c235a967053e54aa28148170e498164b59"
 dependencies = [
  "proc-macro2",
  "quote",
@@ -25,24 +25,25 @@ dependencies = [
 
 [[package]]
 name = "hs-bindgen"
-version = "0.6.2"
+version = "0.7.0"
 dependencies = [
  "hs-bindgen-derive",
- "hs-bindgen-traits",
+ "hs-bindgen-traits 0.7.0",
 ]
 
 [[package]]
 name = "hs-bindgen-derive"
-version = "0.6.1"
+version = "0.7.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "0318c99d815c4aed27bddb8f33ac8d0cca718541eb0da949f0b2738f1e3b09b1"
+checksum = "1c8c82189f5d6e61b0ac4bb0fa6809ae96903442aa5f399362d24dfa2d947196"
 dependencies = [
  "antlion",
  "displaydoc",
- "hs-bindgen-traits",
+ "hs-bindgen-traits 0.6.3",
  "lazy_static",
  "quote",
- "semver",
+ "rustc_version",
+ "semver 1.0.14",
  "serde",
  "syn",
  "thiserror",
@@ -51,9 +52,21 @@ dependencies = [
 
 [[package]]
 name = "hs-bindgen-traits"
-version = "0.6.2"
+version = "0.6.3"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "a073bef3de2b35a2b95ba57bac0682dc873a69a82cbacc1a0a5c2a6aac929175"
+checksum = "ab3abfac7b95da9e2e8a1d05531f64a3383fc4654b41a21db3b6ad1ee79cd299"
+dependencies = [
+ "displaydoc",
+ "proc-macro2",
+ "quote",
+ "thiserror",
+]
+
+[[package]]
+name = "hs-bindgen-traits"
+version = "0.7.0"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "1f5a238da188717ebeb3415c87b84d8c82ec46f77deb57b5303f4afde49593fe"
 dependencies = [
  "displaydoc",
  "proc-macro2",
@@ -86,10 +99,34 @@ dependencies = [
 ]
 
 [[package]]
+name = "rustc_version"
+version = "0.2.3"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "138e3e0acb6c9fb258b19b67cb8abd63c00679d2851805ea151465464fe9030a"
+dependencies = [
+ "semver 0.9.0",
+]
+
+[[package]]
+name = "semver"
+version = "0.9.0"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "1d7eb9ef2c18661902cc47e535f9bc51b78acd254da71d375c2f6720d9a40403"
+dependencies = [
+ "semver-parser",
+]
+
+[[package]]
 name = "semver"
 version = "1.0.14"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "e25dfac463d778e353db5be2449d1cce89bd6fd23c9f1ea21310ce6e5a1b29c4"
+
+[[package]]
+name = "semver-parser"
+version = "0.7.0"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "388a1df253eca08550bef6c72392cfe7c30914bf41df5269b68cbd6ff8f570a3"
 
 [[package]]
 name = "serde"
