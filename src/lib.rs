@@ -3,7 +3,7 @@
 //! Handy macro to generate C-FFI bindings to Rust for Haskell.
 //!
 //! This library intended to work best in a project configured by
-//! [`cabal-pack`](https://github.com/yvan-sraka/cabal-pack).
+//! [`cargo-cabal`](https://github.com/yvan-sraka/cargo-cabal).
 //!
 //! **N.B.** The MSRV is **1.64.0** since it use `core_ffi_c` feature.
 //!
@@ -142,5 +142,5 @@
 
 #![forbid(unsafe_code)]
 
-pub use hs_bindgen_derive::hs_bindgen;
+pub use hs_bindgen_attribute::hs_bindgen;
 pub use hs_bindgen_traits as traits;
