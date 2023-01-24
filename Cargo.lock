@@ -25,7 +25,7 @@ dependencies = [
 
 [[package]]
 name = "hs-bindgen"
-version = "0.7.1"
+version = "0.8.0"
 dependencies = [
  "hs-bindgen-attribute",
  "hs-bindgen-traits",
@@ -33,9 +33,9 @@ dependencies = [
 
 [[package]]
 name = "hs-bindgen-attribute"
-version = "0.7.1"
+version = "0.8.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "0312120db6e0d20ae97503a94b96f5517696615ab47e373476198b2f44311fb6"
+checksum = "e57fc3cb0491f749fc50e7cf186c189b64af557edb9f78e36eb78bb9021d6624"
 dependencies = [
  "antlion",
  "displaydoc",
@@ -52,15 +52,15 @@ dependencies = [
 
 [[package]]
 name = "hs-bindgen-traits"
-version = "0.7.1"
+version = "0.8.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "8cf90dfae9a543103bd0ee30bc93854fa44efb49b18a5c3a56e1a48b79612282"
+checksum = "e92e839254ee5975299f64183e8346548c4ba5e4ee0253a05426891a6f135a6a"
 
 [[package]]
 name = "hs-bindgen-types"
-version = "0.7.1"
+version = "0.8.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "7c28562d29f40d530365122751e2f2401c4b2d9f0613ccf30ff6bf23bcae3d43"
+checksum = "c2d986de5641ea4aa8025589d7243e403961fb0f5572c4dd4764a1bb4a01768c"
 dependencies = [
  "displaydoc",
  "proc-macro2",

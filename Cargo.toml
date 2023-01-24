@@ -6,15 +6,15 @@ license = "MIT OR Apache-2.0"
 name = "hs-bindgen"
 repository = "https://github.com/yvan-sraka/hs-bindgen"
 rust-version = "1.64.0"
-version = "0.7.1"
+version = "0.8.0"
 
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
 [lib]
 
 [dependencies]
-hs-bindgen-attribute = { version = "0.7", default-features = false }
-hs-bindgen-traits = { version = "0.7", default-features = false }
+hs-bindgen-attribute = { version = "0.8", default-features = false }
+hs-bindgen-traits = { version = "0.8", default-features = false }
 
 [features]
 default = ["std"]
