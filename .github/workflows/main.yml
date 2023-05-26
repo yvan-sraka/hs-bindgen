@@ -11,12 +11,13 @@ env:
 
 jobs:
   build:
-
-    runs-on: ubuntu-latest
-
+    strategy:
+      matrix:
+        os: [ubuntu-latest, macos-latest, windows-latest]
+    runs-on: ${{ matrix.os }}
     steps:
     - uses: actions/checkout@v3
     - name: Build (--features full)
       run: cargo build --verbose --features full
-    - name: Run tests ( --features full)
+    - name: Run tests (--features full)
       run: cargo test --verbose --features full
