@@ -37,7 +37,7 @@
 //! extern "C" fn __c_greetings(__0: *const core::ffi::c_char) -> () {
 //!     // `traits` module is `hs-bindgen::hs-bindgen-traits`
 //!     // n.b. do not forget to import it, e.g., with `use hs-bindgen::*`
-//!     traits::ReprC::from(greetings(traits::ReprRust::from(__0),))
+//!     traits::FromReprC::from(greetings(traits::FromReprRust::from(__0),))
 //! }
 //! ```
 //!
@@ -45,11 +45,11 @@
 //! interface:
 //!
 //! ```rust
-//! use hs_bindgen::{traits::ReprRust, *};
+//! use hs_bindgen::{traits::FromReprRust, *};
 //! use std::marker::PhantomData;
 //!
 //! /// A custom Rust data-type, `#[repr(transparent)]` is not useful here
-//! /// since `ReprRust` trait will offers the constructor we need to construct
+//! /// since `FromReprRust` trait will offers the constructor we need to construct
 //! /// our type out of a C-FFI safe primitive data-structure.
 //! struct User<T: Kind> {
 //!     name: String,
@@ -84,10 +84,10 @@
 //! monomorphised methods are AFAIK not a publicly specified behavior), but
 //! this limitation didn’t apply to `hs-bindgen-traits` implementations! */
 //!
-//! impl<T: Kind> ReprRust<*const i8> for User<T> {
+//! impl<T: Kind> FromReprRust<*const i8> for User<T> {
 //!     fn from(ptr: *const i8) -> Self {
 //!         User::<T> {
-//!             name: <String as ReprRust<*const i8>>::from(ptr),
+//!             name: <String as FromReprRust<*const i8>>::from(ptr),
 //!             kind: PhantomData::<T>
 //!         }
 //!     }
@@ -114,7 +114,7 @@
 //! - **Modularity:** this library is design in mind to work in a broader range
 //!   of usage, so this library should work in `#[no_std]` setting and most
 //!   features could be opt-out. E.g. the type inference offered by
-//!   [`antlion`](https://github.com/yvan-sraka/antlion) library is optional ;
+//!   [`reflexive`](https://github.com/yvan-sraka/reflexive) library is optional ;
 //!
 //! - **Stability:** this library implements no trick outside the scope of
 //!   stable C ABI (with well-defined memory layout convention), and ensure to

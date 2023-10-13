@@ -3,14 +3,10 @@
 version = 3
 
 [[package]]
-name = "antlion"
-version = "0.3.1"
+name = "cfg-if"
+version = "1.0.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "bcf7aed4234b1c5187bb53a77552d2c235a967053e54aa28148170e498164b59"
-dependencies = [
- "proc-macro2",
- "quote",
-]
+checksum = "baf1de4339761588bc0619e3cbc0120ee582ebb74b53b4efbf79117bd2da40fd"
 
 [[package]]
 name = "displaydoc"
@@ -33,15 +29,15 @@ dependencies = [
 
 [[package]]
 name = "hs-bindgen-attribute"
-version = "0.8.0"
+version = "0.9.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "e57fc3cb0491f749fc50e7cf186c189b64af557edb9f78e36eb78bb9021d6624"
+checksum = "8015da31406adc696f7784aa87042b7554afb08621792b8d7ee76e3e8d0e50d5"
 dependencies = [
- "antlion",
  "displaydoc",
  "hs-bindgen-types",
  "lazy_static",
  "quote",
+ "reflexive",
  "rustc_version",
  "semver 1.0.14",
  "serde",
@@ -52,16 +48,17 @@ dependencies = [
 
 [[package]]
 name = "hs-bindgen-traits"
-version = "0.8.0"
+version = "0.9.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "e92e839254ee5975299f64183e8346548c4ba5e4ee0253a05426891a6f135a6a"
+checksum = "ac4ec8936241746802cfe99813764d0ab06f023a7350df3967e287be456f29fc"
 
 [[package]]
 name = "hs-bindgen-types"
-version = "0.8.0"
+version = "0.9.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "c2d986de5641ea4aa8025589d7243e403961fb0f5572c4dd4764a1bb4a01768c"
+checksum = "aef6c1c28eb3c9a7fd73cb380e2a5114d511ef44b5ffaf5e76559669563abb05"
 dependencies = [
+ "cfg-if",
  "displaydoc",
  "proc-macro2",
  "quote",
@@ -90,6 +87,16 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "bbe448f377a7d6961e30f5955f9b8d106c3f5e449d493ee1b125c1d43c2b5179"
 dependencies = [
  "proc-macro2",
+]
+
+[[package]]
+name = "reflexive"
+version = "0.4.1"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "a88ef05e7d63adad0f2c5f5873903226c03b7f27d219df7f37fb05ab98b5d420"
+dependencies = [
+ "proc-macro2",
+ "quote",
 ]
 
 [[package]]
