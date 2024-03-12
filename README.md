@@ -43,58 +43,8 @@ extern "C" fn __c_greetings(__0: *const core::ffi::c_char) -> () {
 }
 ```
 
-A more complete example, when we now try to pass a custom type to our
-interface:
-
-```rust
-use hs_bindgen::{traits::FromReprRust, *};
-use std::marker::PhantomData;
-
-/// A custom Rust data-type, `#[repr(transparent)]` is not useful here
-/// since `FromReprRust` trait will offers the constructor we need to construct
-/// our type out of a C-FFI safe primitive data-structure.
-struct User<T: Kind> {
-    name: String,
-    kind: PhantomData<T>,
-}
-
-/** Overly engineered traits definitions just for the sake of demonstrating
-limitations of this example, this isn't at all needed by default */
-
-struct Super;
-
-trait Kind {
-    fn greet(name: &str) -> String;
-}
-
-impl Kind for Super {
-    fn greet(name: &str) -> String {
-        format!("Hello, {}!", name)
-    }
-}
-
-/// Declare targeted Haskell signature, return types should be wrapped in
-/// an IO Monad (a behavior enforced by safety concerns)
-#[hs_bindgen(hello :: CString -> IO CString)]
-fn hello(user: User<Super>) -> String {
-    Super::greet(&user.name)
-}
-
-/** n.b. functions wrapped by `#[hs_bindgen]` macro couldn't be
-parametrized by generics (because monomorphisation occurs after macro
-expansion during compilation, and how rustc assign unmangled symbols to
-monomorphised methods are AFAIK not a publicly specified behavior), but
-this limitation didn’t apply to `hs-bindgen-traits` implementations! */
-
-impl<T: Kind> FromReprRust<*const i8> for User<T> {
-    fn from(ptr: *const i8) -> Self {
-        User::<T> {
-            name: <String as FromReprRust<*const i8>>::from(ptr),
-            kind: PhantomData::<T>
-        }
-    }
-}
-```
+A more complete example, that use `borsh` to serialize ADT from Rust to Haskell
+can be found [here](https://github.com/yvan-sraka/hs-bindgen-borsh-example).
 
 ## Design
 
